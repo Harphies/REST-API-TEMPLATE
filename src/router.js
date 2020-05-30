@@ -3,12 +3,15 @@ const router = express.Router();
 const Posts = require("./model/Model");
 
 router.get("/", async (req, res) => {
+  /*
   try {
     const newPost = await Posts.find();
     res.json(newPost);
   } catch (err) {
     res.json({ message: err });
   }
+  */
+  res.send("Hello");
 });
 
 router.post("/post", async (req, res) => {
