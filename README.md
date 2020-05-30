@@ -1,6 +1,12 @@
-## All the functionalities a project may need
+## NodeJs REST API TEMPLATE
 
-## List
+[Test the API here]()
+
+## Dcumentation
+
+[Clicl here for th documentation]
+
+## List of Functions
 
 - SignUp and Login
 - Forget and Reset password
@@ -45,6 +51,8 @@
   - Authentication
 - Deploy/ Dockerize
   - Heroku
+    - Create a Procfile to give an Instruction of how to run the App
+    - Specify the port for heroku to use with process.env.PORT
   - AWS
   - GCP
   - Azure
