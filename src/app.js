@@ -5,7 +5,7 @@ require("dotenv/config");
 const cors = require("cors");
 const app = express();
 const router = require("./router");
-
+const PORT = process.env.PORT || 4000;
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,4 +24,4 @@ mongoose
     console.error(err.message);
   });
 
-app.listen(4000, () => console.log(`App ruunig on port 4000`));
+app.listen(PORT, () => console.log(`App ruunig on port 4000`));
