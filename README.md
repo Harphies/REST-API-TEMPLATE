@@ -1,6 +1,6 @@
 ## NodeJs REST API TEMPLATE
 
-[Test the API here]()
+[Test the API here](https://rest-api-templates.herokuapp.com/)
 
 ## Dcumentation
 
