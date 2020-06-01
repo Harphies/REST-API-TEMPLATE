@@ -40,6 +40,8 @@
   - setup the .env file to save sensitive data
   - import/ require all the neccesary packages needed.
 
+- Add a CI/CD Pipeline
+
 - Connect to database
   - MongoDb
   - Firebase

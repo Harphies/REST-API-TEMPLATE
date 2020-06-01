@@ -4,12 +4,12 @@ const bodyParser = require("body-parser");
 require("dotenv/config");
 const cors = require("cors");
 const app = express();
-const router = require("./router");
+const authRoute = require("./routes/authRoute");
 const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/", router);
+app.use("/", authRoute);
 
 // Connect to database
 mongoose
