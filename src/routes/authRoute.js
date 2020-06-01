@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Posts = require("./model/User");
 
-router.get("/api/user/all", async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
     const newPost = await Posts.find();
     res.json(newPost);
@@ -11,7 +11,7 @@ router.get("/api/user/all", async (req, res) => {
   }
 });
 
-router.post("/api/user/register", async (req, res) => {
+router.post("/register", async (req, res) => {
   const newPost = new Posts({
     title: req.body.title,
     description: req.body.description,
