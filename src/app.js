@@ -24,4 +24,4 @@ mongoose
   });
 
 // server port Initialization
-app.listen(PORT, () => console.log(`App ruunig on port ${PORT}`));
+app.listen(PORT, () => console.log(`App ruunig on port 5000`));
