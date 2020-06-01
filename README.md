@@ -42,6 +42,9 @@
 
 - Add a CI/CD Pipeline
 
+  - Travis CI for CI/CD Pipeline
+  - Circlici for Ci/CD Pipeline
+
 - Connect to database
   - MongoDb
   - Firebase
@@ -59,3 +62,6 @@
   - GCP
   - Azure
 - Test
+  - Automated Test for the endpoints
+
+## Done Features
