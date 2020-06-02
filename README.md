@@ -73,3 +73,4 @@
 - Verify Incorrect password
 - complete Login and Signup endpoints successfully
 - generate token for login users using Jsonwebtoken
+- protect urls for only login users
