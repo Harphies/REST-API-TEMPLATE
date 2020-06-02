@@ -1,8 +1,11 @@
 ## Next Tasks
 
-- complete Login and Signup ad test the endpoints
-- Add token with JWT
-- validate user inputs using express validators
+- Validate user inputs both for login and signup using @hapi/joi
+- Hash pasword with bcrypt
+- verify unregisered users
+- Verify Incorrect password
+- complete Login and Signup endpoints successfully
+- generate token for login users using Jsonwebtoken
 - Test redirect Urls after login
 
 ## Next tasks

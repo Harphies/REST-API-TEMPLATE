@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
 const User = require("../model/User");
 const {
   registerValidation,
@@ -24,10 +25,14 @@ exports.registerUser = async (req, res) => {
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send("Email already exist! Alas");
 
+  // Hash the password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
   const newUser = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
   });
   try {
     const saveUser = await newUser.save();
@@ -35,4 +40,19 @@ exports.registerUser = async (req, res) => {
   } catch (err) {
     res.json({ message: err });
   }
+};
+
+exports.loginUser = async (req, res) => {
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  // check if the current user exist
+  const user = await User.findOne({ email: req.body.email });
+  if (!user)
+    return res
+      .status(400)
+      .send("You're not a registered user;you can't login.");
+  // Check if the password is correct
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
+  if (!validPassword) return res.status(400).send("Invalid Password");
+  res.send("success");
 };

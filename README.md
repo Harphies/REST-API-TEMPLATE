@@ -65,3 +65,11 @@
   - Automated Test for the endpoints
 
 ## Done Features
+
+- Standard and scalable folder structure setup
+- Validate user inputs both for login and signup using @hapi/joi
+- Hash pasword with bcrypt
+- verify unregisered users
+- Verify Incorrect password
+- complete Login and Signup endpoints successfully
+- generate token for login users using Jsonwebtoken
