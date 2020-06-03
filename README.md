@@ -1,4 +1,4 @@
-## Microservices and REST API deployment on these various cloud deploymnt Prividers.
+## Microservices and REST API deployment on these various cloud deployment Providers.
 
 - AWS
 - Azure
