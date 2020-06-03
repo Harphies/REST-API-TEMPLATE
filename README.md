@@ -1,5 +1,6 @@
-## Database Manipulations for performing complex queries
+## Microservices and REST API deployment on these various cloud deploymnt Prividers.
 
-- MongoDb CRUD and other Operations
-- Firebase Firestore CRUD and other operations
-- SQL CRUD and other operations with MYSQL and PostGreSQL
+- AWS
+- Azure
+- DigitalOcean
+- Heroku
