@@ -9,6 +9,7 @@
 ## List of Functions
 
 - SignUp and Login
+- User Email account verification to confirm if it's valid
 - Forget and Reset password
 - Email Account verification
 - Login with Google, Facebook etc

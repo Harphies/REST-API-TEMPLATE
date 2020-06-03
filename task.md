@@ -1,7 +1,9 @@
 ## Next tasks
 
-- Forget password configuration
-- Account registration email verfication
+- Forget password url endpoint
+- send an email with a reset password endpoint to reset the password
+- reset password url endpoint
+- Account registration email verfication (mailgun, sendgrid, mandrill, )
 
 ## Next task
 
