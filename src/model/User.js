@@ -20,6 +20,10 @@ const PostSchema = mongoose.Schema({
     max: 1024,
     min: 6,
   },
+  resetLink: {
+    type: String,
+    default: "",
+  },
   date: {
     type: Date,
     default: Date.now(),

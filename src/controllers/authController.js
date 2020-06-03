@@ -57,6 +57,21 @@ exports.loginUser = async (req, res) => {
   if (!validPassword) return res.status(400).send("Invalid Password");
 
   // Create and Asign a token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: "20m",
+  });
   res.header("auth-token", token).send(token);
+};
+
+exports.emailActivate = async (req, res) => {};
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  // check if the user exist
+  const user = await User.findOne({ email });
+  if (!user)
+    return res.status(400).send("User with this email deos not exist!");
+  //  send an email
+  const token = jwt.sign({ _id: user._id }, process.env.RESET_TOKEN, {
+    expiresIn: "20m",
+  });
 };
