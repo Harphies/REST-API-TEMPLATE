@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const _ = require('lodash')
+const _ = require("lodash");
 const User = require("../model/User");
 const {
   registerValidation,
@@ -53,18 +53,24 @@ exports.loginUser = async (req, res) => {
     return res
       .status(400)
       .send("You're not a registered user;you can't login.");
+  // Confirm user email
+  /*
+ if(!user.confirmed) return res.status(401).send('Please confirm your email)
+  */
   // Check if the password is correct
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) return res.status(400).send("Invalid Password");
 
   // Create and Asign a token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
-    expiresIn: "20m",
+    expiresIn: "2h",
   });
   res.header("auth-token", token).send(token);
 };
 
 exports.emailActivate = async (req, res) => {};
+exports.emailConfirmation = async (req, res) => {};
+/*
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   // check if the user exist
@@ -92,6 +98,8 @@ exports.forgotPassword = async (req, res) => {
     });
   });
 };
+*/
+/*
 exports.resetPassword = async (req, res) => {
   const { resetLink, newPassword } = req.body;
   if (!resetLink) return res.status(401).send("Authentication error");
@@ -116,3 +124,4 @@ exports.resetPassword = async (req, res) => {
     
   });
 };
+*/

@@ -5,6 +5,12 @@
 - reset password url endpoint
 - Account registration email verfication (mailgun, sendgrid, mandrill, )
 
+## I Next task
+
+- I need to create a branch for Authentication once I am done with auth.
+- I need to create a Branch for CRUD of all complexity
+- Create branch for others too on my github
+
 ## Next task
 
 - CRUD

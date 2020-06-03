@@ -10,6 +10,7 @@
 
 - SignUp and Login
 - User Email account verification to confirm if it's valid
+- Confirm Email before Login
 - Forget and Reset password
 - Email Account verification
 - Login with Google, Facebook etc
@@ -67,6 +68,8 @@
 
 ## Done Features
 
+## User Authentication Features
+
 - Standard and scalable folder structure setup
 - Validate user inputs both for login and signup using @hapi/joi
 - Hash pasword with bcrypt
@@ -74,4 +77,6 @@
 - Verify Incorrect password
 - complete Login and Signup endpoints successfully
 - generate token for login users using Jsonwebtoken
-- protect urls for only login users
+- protect urls for only login users with thier token
+- Confirm Email before login
+- Forget and Reset Password
