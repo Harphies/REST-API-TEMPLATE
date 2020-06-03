@@ -6,28 +6,6 @@
 
 [Clicl here for th documentation]
 
-## List of Functions
-
-- SignUp and Login
-- User Email account verification to confirm if it's valid
-- Forget and Reset password
-- Email Account verification
-- Login with Google, Facebook etc
-- JWT Authentication for API
-- Integrating chat
-- Database
-  - Mongodb CRUD
-  - Firebase CRUD
-  - MySQL CRUD
-- data validations
-- API calls/request
-- hashing passwords
-- Setting Up routes
-- creating private routes
-- Authentication with jwt
-- validation
-- File Upload
-
 ## Projects Steps
 
 - Setup the folder strcuture to follow MVC pattern
@@ -51,10 +29,9 @@
   - Firebase
   - MySQL
 - Requirements
-  - Login
-  - Signup/ Register
-  - Validation
   - Authentication
+  - CRUD
+  - API Calls
 - Deploy/ Dockerize
   - Heroku
     - Create a Procfile to give an Instruction of how to run the App
@@ -64,14 +41,3 @@
   - Azure
 - Test
   - Automated Test for the endpoints
-
-## Done Features
-
-- Standard and scalable folder structure setup
-- Validate user inputs both for login and signup using @hapi/joi
-- Hash pasword with bcrypt
-- verify unregisered users
-- Verify Incorrect password
-- complete Login and Signup endpoints successfully
-- generate token for login users using Jsonwebtoken
-- protect urls for only login users
