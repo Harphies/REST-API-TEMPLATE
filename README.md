@@ -6,7 +6,7 @@
 - Travis CI
 - CircleCI
 - Dockerize with Docker and Kubernetesm
-- Write Autimated Tests for the Unit test, Integration test and System test.
+- Write Automated Tests for the Unit testing, Integration testing and System testing.
 
 ## Cloud Services
 
