@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
+const { sendMail } = require("../helpers/mail");
 const User = require("../model/User");
 const {
   registerValidation,
@@ -67,8 +68,9 @@ exports.loginUser = async (req, res) => {
   });
   res.header("auth-token", token).send(token);
 };
-
-exports.confirmEmail = async (req, res) => {};
 exports.activateEmail = async (req, res) => {};
 exports.forgotPassword = async (req, res) => {};
 exports.resetPassword = async (req, res) => {};
+exports.updateProfile = async (req, res) => {};
+exports.logoutUser = async (req, res) => {};
+exports.updatePassword = async (req, res) => {};
