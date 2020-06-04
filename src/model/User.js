@@ -10,6 +10,9 @@ const PostSchema = mongoose.Schema({
   },
   email: {
     type: String,
+    trim: true,
+    unique: true,
+    lowercase: true,
     required: true,
     max: 45,
     min: 6,
@@ -20,8 +23,8 @@ const PostSchema = mongoose.Schema({
     max: 1024,
     min: 6,
   },
-  resetLink: {
-    type: String,
+  resetPasswordLink: {
+    data: String,
     default: "",
   },
   date: {
