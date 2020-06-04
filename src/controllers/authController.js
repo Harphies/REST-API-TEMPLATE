@@ -42,6 +42,7 @@ exports.registerUser = async (req, res) => {
   );
 
   // Email Data sending
+  // Note: The client URL is the url of where the client app will be hosted. it's different from the back end.
   const emailData = {
     from: process.env.EMAIL_FROM,
     to: email,
