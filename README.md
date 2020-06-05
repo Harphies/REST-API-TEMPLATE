@@ -2,9 +2,9 @@
 
 [Test the API here](https://rest-api-templates.herokuapp.com/)
 
-## Dcumentation
+## Documentation
 
-[Clicl here for th documentation]
+[Click here for th documentation]()
 
 ## User Authentication Features
 
