@@ -14,7 +14,8 @@
 ## Next task
 
 - CRUD
-- Dynamic and complex route parameters
+- Dynamic and complex route parameter
+- Redirect urls
 
 ## Next Task
 
@@ -25,4 +26,8 @@
 
 - Oauth with Google,Facebook, Twitter, etc
 
-## Password Hashing
+## Next task
+
+- deployment and url paths for both front end and back end after deployment
+- environment variables in production environment
+- Merging of branches

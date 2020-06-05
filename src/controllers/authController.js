@@ -9,6 +9,8 @@ const User = require("../model/User");
 const {
   registerValidation,
   loginValidation,
+  forgetPasswordValidation,
+  resetPasswordValidation,
 } = require("../validation/userValidation");
 
 exports.getAllUsers = async (req, res) => {
@@ -111,11 +113,83 @@ exports.loginUser = async (req, res) => {
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: "2d",
   });
-  //res.header("auth-token", token).send(token);
-  res.send(token);
+
+  /// const { _id, name } = user;
+  res.header("auth-token", token).send(token);
 };
-exports.forgetPassword = async (req, res) => {};
-exports.resetPassword = async (req, res) => {};
+exports.forgetPassword = async (req, res) => {
+  const { email } = req.body;
+  const { error } = forgetPasswordValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  // check the user if it exist
+  const user = await User.findOne({ email });
+  if (!user) return res.status(400).send("User with this email does not exist");
+  // generate a token
+  const token = jwt.sign(
+    { _id: user._id },
+    process.env.FORGET_PASSWORD_SECRET,
+    { expiresIn: "2h" }
+  );
+  // send an email link for retrieving password.
+  const emailData = {
+    from: process.env.EMAIL_FROM,
+    to: email,
+    subject: "Password Reset link",
+    html: `
+    <h1> Please click this link to Reset your password</h1>
+    <p>${process.env.CLIENT_URL}/user/password/reset/${token} </p>
+    <hr/>
+    <p>This email contains sensitive Info</p>
+    <p>${process.env.CLIENT_URL}</p>
+    `,
+  };
+  try {
+    await user.updateOne({
+      resetPasswordLink: token,
+    });
+    // send email
+    try {
+      await sgMail.send(emailData);
+      return res.json({ message: "Email has been sent" });
+    } catch (error) {
+      return res.json({ error });
+    }
+  } catch (err) {
+    res.status(400).send("Error Updating the Reset Link");
+  }
+};
+exports.resetPassword = async (req, res) => {
+  // validate the data
+  const { error } = resetPasswordValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  const { resetPasswordLink, newPassword } = req.body;
+  if (resetPasswordLink) {
+    try {
+      jwt.verify(resetPasswordLink, process.env.FORGET_PASSWORD_SECRET);
+      const user = await User.findOne({
+        resetPasswordLink,
+      });
+      if (!user) return res.status(400).send("Something went wrong, try again");
+      // update the user with the new password and empty the reset link in the db
+      const updateFields = {
+        password: newPassword,
+        resetPasswordLink: "",
+      };
+      user = _.extend(user, updateFields);
+      try {
+        await user.save();
+        res.status(200).json({
+          message: "Looking good;You can now login with your new password",
+        });
+      } catch (err) {
+        res.status(400).send("Error resetting your password");
+      }
+    } catch (err) {
+      res.status(403).send("Expired Link, try again");
+    }
+  }
+};
+exports.signInWithGoogle = async (req, res) => {};
 exports.updateProfile = async (req, res) => {};
 exports.logoutUser = async (req, res) => {};
 exports.updatePassword = async (req, res) => {};
