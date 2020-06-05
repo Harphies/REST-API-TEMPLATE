@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 const sgMail = require("@sendgrid/mail");
+const { OAuth2Client } = require("google-auth-library");
 sgMail.setApiKey(process.env.MAIL_KEY);
 const User = require("../model/User");
 const {
@@ -189,7 +190,56 @@ exports.resetPassword = async (req, res) => {
     }
   }
 };
-exports.signInWithGoogle = async (req, res) => {};
+
+// Sign In with Google
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT);
+exports.signInWithGoogle = async (req, res) => {
+  const { idToken } = req.body;
+  try {
+    const response = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT,
+    });
+    // check if there is no response
+    if (!response) return res.status(400).send("Unable to retrive your data");
+    // check if there is a response
+    const { email_verified, name, email } = response.payload;
+    // If the email is not verified
+    if (!email_verified) return res.status(400).send("Email Not verifid");
+    // If the email is verified, check if we have the user in the Db
+    const user = await User.findOne({ email });
+    // if user exist, generate a token for the user and allow it to sign in.
+    if (user) {
+      const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+        expiresIn: "7d",
+      });
+      const { _id, email, name } = user;
+      return res.json({
+        token,
+        user: { _id, email, name },
+      });
+    }
+    // if the user doesn't exist; create the user and save into the Db
+    let password = email + process.env.TOKEN_SECRET;
+    user = new User({ name, email, password });
+    try {
+      const createdUser = await user.save();
+      if (!createdUser) return res.status(400).send("Empty data");
+      // generate a token for the newly created user
+      const token = jwt.sign(
+        { _id: createdUser._id },
+        process.env.TOKEN_SECRET,
+        { expiresIn: "7d" }
+      );
+      const { _id, email, name } = createdUser;
+      return res.status(200).json({ token, user: { _id, email, name } });
+    } catch (err) {
+      return res.status(400).send("User signUp failed with Google");
+    }
+  } catch (err) {
+    res.send("Google Login failed, Try again");
+  }
+};
 exports.updateProfile = async (req, res) => {};
 exports.logoutUser = async (req, res) => {};
 exports.updatePassword = async (req, res) => {};
