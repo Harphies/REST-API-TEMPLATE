@@ -19,7 +19,8 @@
   - setup the .env file to save sensitive data
   - import/ require all the neccesary packages needed.
 
-- Add a CI/CD Pipeline
+- Version control
+- Automated CI/CD Pipeline
 
   - Travis CI for CI/CD Pipeline
   - Circlici for Ci/CD Pipeline
@@ -29,9 +30,11 @@
   - Firebase
   - MySQL
 - Requirements
+
   - Authentication
   - CRUD
   - API Calls
+
 - Deploy/ Dockerize
   - Heroku
     - Create a Procfile to give an Instruction of how to run the App
@@ -39,5 +42,7 @@
   - AWS
   - GCP
   - Azure
-- Test
+- Test/ Code Quality
   - Automated Test for the endpoints
+- Documented API : contract first approach
+- Demos
