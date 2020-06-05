@@ -4,11 +4,11 @@
 
 ## Dcumentation
 
-[Clicl here for th documentation]
+[Click here for th documentation]()
 
 ## Projects Steps
 
-- Setup a maintanable REST API Microservices folder structure following MVC and clean architecture pattern.
+- Setup a maintanable REST API and Microservices folder structure following MVC and clean architecture pattern.
 - Version control
   - Git/Github
 - Automated CI/CD Pipeline
