@@ -8,3 +8,4 @@
 - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
 - [SQL vs MongoDb mapping](https://docs.mongodb.com/manual/reference/sql-comparison/)
 - [Awesome MongoDb](https://github.com/ramnes/awesome-mongodb)
+- [Mongoose schema types](https://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
