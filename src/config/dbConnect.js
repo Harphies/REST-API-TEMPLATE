@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 // Connect to database
 exports.connectDB = async () => {
   try {
-    await mongoose.connect(process.env.DB_CONNECT, {
+    await mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
@@ -12,5 +12,7 @@ exports.connectDB = async () => {
     console.log("connected to database");
   } catch (err) {
     console.error(err.message);
+    // Exit process with Failure
+    process.exit(1);
   }
 };
