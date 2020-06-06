@@ -18,6 +18,7 @@
 - complete Login and Signup endpoints
 - Forget and Reset Password enpoints
 - Resend Forget password by user if the link has expired
+- Verify OTP and Resend OTP
 - Remeber me :persist Login
 - generate token for login users using Jsonwebtoken
 - protect urls for only login users with thier token and specify the expire time.
@@ -28,7 +29,7 @@
 
 ## Notes
 
-- authntication : verifying identity (401, unathorized)
+- authentication : verifying identity (401, unathorized)
 - authorization: verifying permission (403, forbidden)
 - stateful: session using a cookie with session ID
 - stateless: token using JWT/OAuth/other
