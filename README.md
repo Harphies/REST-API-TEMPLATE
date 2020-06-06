@@ -6,7 +6,7 @@
 
 [Click here for th documentation]()
 
-## User Authentication Features
+## User Authentication and Authorization Features
 
 - User data Model
 - Setup all the Auth Routes
