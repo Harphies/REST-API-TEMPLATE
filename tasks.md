@@ -4,6 +4,7 @@
 
 - Database setup
 - Models schema and schema types
+- Mongodb Offline setup
 - create and save to database
 
 ## Next task [Read(retrieve)/SELECT/GET/Find] 09/06/2020

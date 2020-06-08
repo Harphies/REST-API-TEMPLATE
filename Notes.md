@@ -1,2 +1,1 @@
 ## essential Notes
-
