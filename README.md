@@ -10,13 +10,19 @@
 - [Awesome MongoDb](https://github.com/ramnes/awesome-mongodb)
 - [Mongoose schema types](https://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
 - [Mongoose querry](https://mongoosejs.com/docs/queries.html)
+- [MongoDB cheat sheet](https://blog.codecentric.de/files/2012/12/MongoDB-CheatSheet-v1_0.pdf)
 
-## Mongodb
+## SQl -> Mongodb Mapping
 
 - Database -> database
 - Collections -> Tables
-- Documents -> Rows
+- Documents/BSON -> Rows
 - Fiedls -> Columns
+- Table Joins -> Embedded documents
+- index -> Index
+- Primary key -> Primary key
+- Primary key is automatically set to \_id in mongodb
+- Aggregrate(e.g group by) ->aggregrate framework
 
 ## MongoDB Layered architecture
 
@@ -25,7 +31,7 @@
     - documents
       - Fields
 
-## Usefu MongoDb concepts
+## Useful MongoDb concepts
 
 - Embedded documents and Array approximate of 100 steps
 - Projections
