@@ -24,6 +24,9 @@ const PostSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  details: {
+    title: [{}, {}, {}],
+  },
 });
 
 module.exports = mongoose.model("User", PostSchema);
