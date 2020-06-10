@@ -6,6 +6,7 @@
 ## Resources
 
 - [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
+- [Db design](https://github.com/jdmedlock/dbdesign)
 - [SQL vs MongoDb mapping](https://docs.mongodb.com/manual/reference/sql-comparison/)
 - [Awesome MongoDb](https://github.com/ramnes/awesome-mongodb)
 - [Mongoose schema types](https://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
@@ -41,6 +42,10 @@
 - Projections
 - Accesing structured data
 - Filters and Operators for efficient retrieving
+- custom \_id
+- ordered Inserts
+- Storage Engine & writeConcern
+- Atomocity
 - mongodb data types
 - data types and limit
 - Relationship options
@@ -69,9 +74,40 @@
 - Schema should be based on your application need
 - Important factors are:Read and Write frequency, relations,amount(size) of data
 
+## Schema Modelling Rules
+
+- As general rule, try to embed unless you have reasons not to do so.
+- If the objects you are going to embed may be accessed in a isolated way (it makes sense to access it out of the document context) you have a reason for not embedding.
+- If the array with embedded objects may grow in an unbounded way, you have another reason for not embedding. As a general rule, we should not embed more than a couple of hundreds of documents/objects neither more than a couple of thousands ObjectIDs.
+- Denormalize one or several fields of a document from the many side into the array in the one side (One-to-Many relationship) can save us some extra queries (application-level joins). IMO, denormalization is one of the keys to get the most out of this kind of databases. But, denormalization only makes sense if the denormalized field/s will be seldom updated. Otherwise, finding and updating all the instances is likely to overwhelm the savings that we get from denormalizing. So that, consider the read/write ratio for the field/s before denormalizing.
+- Don't be afraid of application-level joins. With the right indexing, they are barely more expensive than server-level joins. (Update: last MongoDB versions includes the \$lookup operator that allows us to do server-level JOINS, concretely LEFT OUTER JOINS)
+- And remember: Design your schemas the way through fit as well as possible your application's data access patterns. We want to structure our data to match the ways that our application queries and updates it.
+
 ## Things to consider for modelling relations
 
 - Use embedded documents if you got one-to-one or one-to-many relationships and no app or data size reason to split.
 - Use reference if data amount/size or application needs require it or for many-to-many relations.
 
 ## CRUD Operations
+
+- Create: Document creation and Importing documents
+  - insertOne()
+  - insertMany()
+  - insert()
+  - mongo import
+- Read : Reading/Quering documents with Operation : Accessing the required data efficiently
+  - Methods, Filters:range filter and Operators
+  - Query Operators
+    - Comparison
+    - Evaluation
+    - Logical
+    - Array
+    - Element
+    - Comments
+    - Geospatial
+  - Query Operator is for locating data
+  - Projection Operators is to modify data presentation
+    - \$
+    - \$ elemMatch
+    - \$meta
+    - \$slice
