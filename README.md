@@ -52,6 +52,7 @@
   - Embedded
   - Reference (if changes are needed often everywhere, reference method is preferable)
 - Merging reference relation using lookup
+- Indexes
 - Schema validation
   - validation levels
     - strict
@@ -111,3 +112,16 @@
     - \$ elemMatch
     - \$meta
     - \$slice
+- Update
+  - updateOne
+  - uodateMany
+  - Array Update operators
+  - upsert
+  - update operators
+- Delete
+
+  - deleteOne
+  - deleteMany
+
+- Indexes: It helps Retrive data efficiently because the query only have to run on the subset of all documents.
+- Using Indexes for sorting; especially for large documents query
