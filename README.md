@@ -1,127 +1,115 @@
-## Node-Express for Mongodb REST API data querries
+## Singledoctor
 
-- Schemas
-- Queries/Operations
+<img src='./logo.png' height='100'>
 
-## Resources
+[docs](http://localhost:5000/api-docs/) • [demo]()<br><br>
 
-- [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)
-- [Db design](https://github.com/jdmedlock/dbdesign)
-- [SQL vs MongoDb mapping](https://docs.mongodb.com/manual/reference/sql-comparison/)
-- [Awesome MongoDb](https://github.com/ramnes/awesome-mongodb)
-- [Mongoose schema types](https://mongoosejs.com/docs/2.7.x/docs/schematypes.html)
-- [Mongoose querry](https://mongoosejs.com/docs/queries.html)
-- [MongoDB cheat sheet](https://blog.codecentric.de/files/2012/12/MongoDB-CheatSheet-v1_0.pdf)
-- [mongo db data types](https://www.tutorialspoint.com/mongodb/mongodb_datatype.htm)
-- [Mongodb documentation](http://mongodb.github.io/node-mongodb-native/3.5/api/)
-- [Mongodb supported BSON types](https://docs.mongodb.com/manual/reference/bson-types/)
-- [Schema validation](https://docs.mongodb.com/manual/core/schema-validation/)
+This is the best platform for finding the best doctor that get to know more about your illness and give you an adequate treatment.
+<br/>
 
-## SQl -> Mongodb Mapping
+## The Application specfications
 
-- Database -> database
-- Collections -> Tables
-- Documents/BSON -> Rows
-- Fiedls -> Columns
-- Table Joins -> Embedded documents
-- index -> Index
-- Primary key -> Primary key
-- Primary key is automatically set to \_id in mongodb
-- Aggregrate(e.g group by) ->aggregrate framework
+- Blog CRUD
+  - Create new Blog
+    - Authenticated Users only
+    - Must have a Role Admin or Publisher
+    - Publisher can create multiple blog
+  - Update a Blog
+    - Admin Only
+  - Delete Blog
+    - Admin Only
+  - Filter a specific Blog
+    - Everyone
+- Forum CRUD
+  - Create new Forum Post
+    - Only admin can create a forum post
+  - Delete
+- Doctor Services CRUD
+  - patient can schedule a treatment Appointmnt with the doctor.
+    - Collect the patient name
+    - Schedule a time
+    - Collect the treatment details.
+    - Patient email if not a registered user
+    - Cost: free, discounted,
+    - Generate a treatment appointment link with Google Meet and send to the patient.
+- User & Authentication
 
-## MongoDB Layered architecture
+  - Authentication will be done using JWT/cookies
+  - Database Setup with Mongodb Atlas
+  - User Model/schema/methods
+  - Doctor Registration
 
-- Database
-  - Collections
-    - documents
-      - Fields
+    - Register a doctor as "user"
+    - validate the inputs provided by the user
+    - Once registered, a token will be sent along with a cookie(token)
+    - Passwords must be harshed
 
-## Useful MongoDb concepts
+  - Doctor Activation
 
-- Nested/Embedded documents and Array approximate of 100 steps
-- Projections
-- Accesing structured data
-- Filters and Operators for efficient retrieving
-- custom \_id
-- ordered Inserts
-- Storage Engine & writeConcern
-- Atomocity
-- mongodb data types
-- data types and limit
-- Relationship options
-  - Embedded
-  - Reference (if changes are needed often everywhere, reference method is preferable)
-- Merging reference relation using lookup
-- Indexes
-- Schema validation
-  - validation levels
-    - strict
-    - moderate
-  - validation actions
-    - error
-    - warn
+    - An email will be sent to confirm a doctor registration before saving in the database
+    - Once Activated, then doctor can login
 
-## Things to consider for Data modelling and structuring
+  - Doctor Register with Gmail
+    - Get Google client ID and Client Secret
+    - Collect the user Info from the API
+    - Check if the user already exist and Login
+    - if the user does not exist, register the user.
+  - Doctor Login with Gmail
+    - verify if the email exists and allow to login if exists.
+  - Doctor Login
+    - verify unregisered users before login
+    - Verify Incorrect password
+    - User must activate email before login
+    - user can Login with Google gmail account
+    - user can Login with email and password
+    - Plain text will be compare with stored hashed password
+    - Once Logged in, a token will be sent along with a cookie.
+    - redirect to the home page
+  - Doctor logout
+    - Cookie will be sent to set token = none
+  - Get the currently logged in doctor
+    - Route to get the currently logged in user (via token)
+  - Doctor Reset/Update password (lost pasword)
+    - Check if the user exits in the database
+    - send an email link for retrieving password.
+    - A hashed token will be emailed to the users registered email address
+    - Take the user to a reset password page(url) where user can input new details
+    - Resend Forget password by user if the link has expired
+    - Verify OTP and Resend OTP
+    - A hashed token will be emailed to the user registered email address
+  - Update User info
+    - Authenticated user only
+    - Seperate routes to update password.
+  - User CRUD
 
-- In which format will you fetch your data
-- How often do you fetch data and change your data
-- How much data will you save (and how big it is)
-- How is your data related
-- Will duplicate hurts you (many Updates)
-- Will you hit data or storage limits
+## Documentation
 
-## Things to consider for modelling
+- Postman for documentation
+- docgen to generate html files from published postman documentation
+- Swagger Auto-generate documentation
 
-- Schema should be based on your application need
-- Important factors are:Read and Write frequency, relations,amount(size) of data
+## Deployment (AWS) & Automation
 
-## Schema Modelling Rules
+- Push to Github
+- deploy through circleci job and workflow
+- Dockerize with and push image to docker hub
 
-- As general rule, try to embed unless you have reasons not to do so.
-- If the objects you are going to embed may be accessed in a isolated way (it makes sense to access it out of the document context) you have a reason for not embedding.
-- If the array with embedded objects may grow in an unbounded way, you have another reason for not embedding. As a general rule, we should not embed more than a couple of hundreds of documents/objects neither more than a couple of thousands ObjectIDs.
-- Denormalize one or several fields of a document from the many side into the array in the one side (One-to-Many relationship) can save us some extra queries (application-level joins). IMO, denormalization is one of the keys to get the most out of this kind of databases. But, denormalization only makes sense if the denormalized field/s will be seldom updated. Otherwise, finding and updating all the instances is likely to overwhelm the savings that we get from denormalizing. So that, consider the read/write ratio for the field/s before denormalizing.
-- Don't be afraid of application-level joins. With the right indexing, they are barely more expensive than server-level joins. (Update: last MongoDB versions includes the \$lookup operator that allows us to do server-level JOINS, concretely LEFT OUTER JOINS)
-- And remember: Design your schemas the way through fit as well as possible your application's data access patterns. We want to structure our data to match the ways that our application queries and updates it.
+## Security
 
-## Things to consider for modelling relations
+- Encrypt passwords and reset tokens
+- protect urls for only login users with thier token and specify the expire time.
+- Prevent cross site scripting -XSS
+- Prevent NoSQL Injections
+- Protect against http param polution
+- Add heades for security (helmet)
+- Use cors to make API public
 
-- Use embedded documents if you got one-to-one or one-to-many relationships and no app or data size reason to split.
-- Use reference if data amount/size or application needs require it or for many-to-many relations.
+## Suggestions
 
-## CRUD Operations
+- session flash connect
+- express-session
 
-- Create: Document creation and Importing documents
-  - insertOne()
-  - insertMany()
-  - insert()
-  - mongo import
-- Read : Reading/Quering documents with Operation : Accessing the required data efficiently
-  - Methods, Filters:range filter and Operators
-  - Query Operators
-    - Comparison
-    - Evaluation
-    - Logical
-    - Array
-    - Element
-    - Comments
-    - Geospatial
-  - Query Operator is for locating data
-  - Projection Operators is to modify data presentation
-    - \$
-    - \$ elemMatch
-    - \$meta
-    - \$slice
-- Update
-  - updateOne
-  - uodateMany
-  - Array Update operators
-  - upsert
-  - update operators
-- Delete
+## Installation
 
-  - deleteOne
-  - deleteMany
-
-- Indexes: It helps Retrive data efficiently because the query only have to run on the subset of all documents.
-- Using Indexes for sorting; especially for large documents query
+`npm run dev`
+`http://localhost:5000/api-docs/`
