@@ -44,9 +44,9 @@ Boilerplate for creating a scalable and maintainable REST API's
   - Plain text will be compare with stored hashed password
   - Once Logged in, a token will be sent along with a cookie.
   - redirect to the home page
-- Doctor logout
+- User logout
   - Cookie will be sent to set token = none
-- Get the currently logged in doctor
+- Get the currently logged in user
   - Route to get the currently logged in user (via token)
 - User Reset/Update password (lost pasword)
   - Check if the user exits in the database
