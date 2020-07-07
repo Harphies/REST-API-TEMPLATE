@@ -61,6 +61,15 @@ Boilerplate for creating a scalable and maintainable REST API's
   - Seperate routes to update password.
 - User Profile CRUD
 
+## AWS functionalities
+
+- EC2 Instances
+- S3 Buckets
+- DynamoDB
+- Lambda Functions
+- SNS
+- SQS
+
 ## Documentation
 
 - Postman for documentation
